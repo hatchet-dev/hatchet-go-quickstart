@@ -1,6 +1,6 @@
 # Hatchet: Go SDK Quickstart
 
-This repository contains a simple application which showcases how to use the [Hatchet](github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/worker.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
+This repository contains a simple application which showcases how to use the [Hatchet](https://github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/worker.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
 
 ## Getting Started
 
