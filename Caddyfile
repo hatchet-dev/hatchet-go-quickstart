@@ -1,0 +1,11 @@
+app.dev.hatchet-tools.com {
+	tls internal
+
+	handle /api/* {
+		reverse_proxy localhost:8088
+	}
+
+	handle /* {
+		reverse_proxy localhost:9099
+	}
+}
