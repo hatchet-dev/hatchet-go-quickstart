@@ -2,7 +2,7 @@ module hatchet-go-quickstart
 
 go 1.21.3
 
-require github.com/hatchet-dev/hatchet v0.2.0-alpha.5
+require github.com/hatchet-dev/hatchet v0.3.0-alpha.0
 
 require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
