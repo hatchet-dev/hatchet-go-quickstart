@@ -40,3 +40,8 @@ EOF
 5. Run the server and worker in two separate shell sessions via: `go run ./cmd/server` and `go run ./cmd/worker`.
 
 6. Run `curl http://localhost:1323/test` to test the endpoint.
+
+You will see events and workflows populated in the Hatchet dashboard:
+
+<img width="1728" alt="image" src="https://github.com/hatchet-dev/hatchet-go-quickstart/assets/25448214/376e4ee8-7233-4a84-85b8-f71ad9e7402e">
+
