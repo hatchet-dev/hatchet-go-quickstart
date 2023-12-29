@@ -10,9 +10,15 @@ services:
       - POSTGRES_PASSWORD=hatchet
       - POSTGRES_DB=hatchet
     ports:
-      - "5433:5432"
+      - "5435:5432"
     volumes:
       - hatchet_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "hatchet"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
   rabbitmq:
     image: "rabbitmq:3-management"
     hostname: "rabbitmq"
@@ -27,7 +33,7 @@ services:
       - "hatchet_rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf" # Configuration file mount
     healthcheck:
       test: ["CMD", "rabbitmqctl", "status"]
-      interval: 30s
+      interval: 10s
       timeout: 10s
       retries: 5
   migration:
@@ -35,7 +41,8 @@ services:
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
   setup-config:
     image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.3.0-alpha.0
     command: /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
@@ -49,9 +56,15 @@ services:
     volumes:
       - ./certs:/hatchet/certs
       - hatchet_config:/hatchet/config
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
   hatchet-engine:
     image: ghcr.io/hatchet-dev/hatchet/hatchet-engine:v0.3.0-alpha.0
     command: /hatchet/hatchet-engine --config /hatchet/config
+    restart: on-failure
     depends_on:
       setup-config:
         condition: service_completed_successfully
@@ -68,6 +81,7 @@ services:
   hatchet-api:
     image: ghcr.io/hatchet-dev/hatchet/hatchet-api:v0.3.0-alpha.0
     command: /hatchet/hatchet-api --config /hatchet/config
+    restart: on-failure
     ports:
       - "8088:8080"
     depends_on:
