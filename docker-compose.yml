@@ -37,14 +37,14 @@ services:
       timeout: 10s
       retries: 5
   migration:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.3.0-alpha.1
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.3.0-alpha.4
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
     depends_on:
       postgres:
         condition: service_healthy
   setup-config:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.3.0-alpha.1
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.3.0-alpha.4
     command: /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
@@ -62,7 +62,7 @@ services:
       postgres:
         condition: service_healthy
   hatchet-engine:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-engine:v0.3.0-alpha.1
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-engine:v0.3.0-alpha.4
     command: /hatchet/hatchet-engine --config /hatchet/config
     restart: on-failure
     depends_on:
@@ -79,7 +79,7 @@ services:
       - ./certs:/hatchet/certs
       - hatchet_config:/hatchet/config
   hatchet-api:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-api:v0.3.0-alpha.1
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-api:v0.3.0-alpha.4
     command: /hatchet/hatchet-api --config /hatchet/config
     restart: on-failure
     ports:
@@ -95,7 +95,7 @@ services:
       - ./certs:/hatchet/certs
       - hatchet_config:/hatchet/config
   hatchet-frontend:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-frontend:v0.3.0-alpha.1
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-frontend:v0.3.0-alpha.4
     ports:
       - "9099:80"
 
