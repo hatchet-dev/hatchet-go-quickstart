@@ -25,17 +25,10 @@ This quickstart example requires the following tools to work:
     Password: Admin123!!
     ```
 
-4. Create the required environment variables via:
+4. Create a token and put it in .env:
 
-    ```sh
-    cat > .env <<EOF
-    HATCHET_CLIENT_TENANT_ID=707d0855-80ab-4e1f-a156-f1c4546cbf52
-    HATCHET_CLIENT_TLS_ROOT_CA_FILE=./certs/ca.cert
-    HATCHET_CLIENT_TLS_CERT_FILE=./certs/client-worker.pem
-    HATCHET_CLIENT_TLS_KEY_FILE=./certs/client-worker.key
-    HATCHET_CLIENT_TLS_SERVER_NAME=cluster
-    EOF
-    ```
+    - Navigate to the [token page](https://app.dev.hatchet-tools.com/tenant-settings/api-tokens) and create a token.
+    - Click the copy to clipboard button and paste into a new file called `.env` in the root of this repository.
 
 5. Run the server and worker in two separate shell sessions via: `go run ./cmd/server` and `go run ./cmd/worker`.
 
