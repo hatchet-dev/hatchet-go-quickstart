@@ -1,6 +1,6 @@
 module hatchet-go-quickstart
 
-go 1.21.3
+go 1.22.3
 
 require (
 	github.com/hatchet-dev/hatchet v0.28.6
