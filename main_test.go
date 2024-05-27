@@ -6,16 +6,9 @@ import (
 	"net/http"
 	"testing"
 	"time"
-
-	"github.com/joho/godotenv"
 )
 
 func TestExample(t *testing.T) {
-	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
-
 	if err := server.Run(); err != nil {
 		t.Fatal(err)
 	}

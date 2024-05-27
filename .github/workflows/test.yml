@@ -1,7 +1,7 @@
 name: test
 on: pull_request
 jobs:
-  generate:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,8 +15,13 @@ jobs:
       - name: Compose
         run: docker compose up -d
 
+      - name: Wait for Hatchet
+        run: sleep 10
+
       - name: Test
-        run: go test ./... -v -failfast
+        run: |
+          export HATCHET_CLIENT_TOKEN="$(docker exec hatchet-go-quickstart-hatchet-engine-1 "/bin/bash" -c "cat /hatchet/config/token.txt")"
+          go test ./... -v -failfast
 
       - name: Teardown
         run: docker compose down
