@@ -53,8 +53,9 @@ services:
       SERVER_TASKQUEUE_RABBITMQ_URL: amqp://user:password@rabbitmq-go-quickstart:5672/
       SERVER_AUTH_COOKIE_DOMAIN: localhost:4050
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"
-      SERVER_GRPC_BROADCAST_ADDRESS: "0.0.0.0:7077"
+      SERVER_GRPC_BROADCAST_ADDRESS: "127.0.0.1:7077"
       SERVER_GRPC_PORT: "7077"
+      SERVER_GRPC_INSECURE: "true"
     volumes:
       - ./certs:/hatchet/certs
       - hatchet_quickstart_config:/hatchet/config
@@ -79,8 +80,9 @@ services:
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"
-      SERVER_GRPC_BROADCAST_ADDRESS: "0.0.0.0:7077"
+      SERVER_GRPC_BROADCAST_ADDRESS: "127.0.0.1:7077"
       SERVER_GRPC_PORT: "7077"
+      SERVER_GRPC_INSECURE: "true"
     volumes:
       - ./certs:/hatchet/certs
       - hatchet_quickstart_config:/hatchet/config

@@ -1,16 +1,15 @@
 package worker
 
 import (
-	"context"
 	"fmt"
-	"hatchet-go-quickstart/internal/events"
+	"hatchet-go-quickstart/internal/types"
 	"os"
 
 	"github.com/hatchet-dev/hatchet/pkg/client"
 	"github.com/hatchet-dev/hatchet/pkg/worker"
 )
 
-func Run() error {
+func Run(check chan string) error {
 	token := os.Getenv("HATCHET_CLIENT_TOKEN")
 	if token == "" {
 		return fmt.Errorf("HATCHET_CLIENT_TOKEN is not set")
@@ -35,11 +34,21 @@ func Run() error {
 		Description: "Test workflow.",
 		Steps: []*worker.WorkflowStep{
 			{
-				Function: func(ctx context.Context, event *events.TestEvent) error {
+				Function: func(ctx worker.HatchetContext, event *types.TestEvent) error {
 					fmt.Println("got event: ", event.Name)
+					check <- "step1"
 					return nil
 				},
 				Name: "first-event",
+			},
+			{
+				Parents: []string{"first-event"},
+				Function: func(ctx worker.HatchetContext, event *types.TestEvent) error {
+					fmt.Println("got event: ", event.Name)
+					check <- "step2"
+					return nil
+				},
+				Name: "second-event",
 			},
 		},
 	})

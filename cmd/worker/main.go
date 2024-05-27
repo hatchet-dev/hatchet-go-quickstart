@@ -12,7 +12,8 @@ func main() {
 		panic(err)
 	}
 
-	if err := worker.Run(); err != nil {
+	ch := make(chan string, 5)
+	if err := worker.Run(ch); err != nil {
 		panic(err)
 	}
 }

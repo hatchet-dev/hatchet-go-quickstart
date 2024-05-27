@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	"hatchet-go-quickstart/internal/events"
+	"hatchet-go-quickstart/internal/types"
 	"net/http"
 	"os"
 
@@ -31,7 +31,7 @@ func Run() error {
 		err = hatchetClient.Event().Push(
 			context.Background(),
 			"test-called",
-			&events.TestEvent{
+			&types.TestEvent{
 				Name: "testing",
 			},
 		)
@@ -43,7 +43,9 @@ func Run() error {
 		return c.String(http.StatusOK, "OK")
 	})
 
-	e.Logger.Fatal(e.Start(":1323"))
+	go func() {
+		e.Logger.Fatal(e.Start(":1323"))
+	}()
 
 	return nil
 }
