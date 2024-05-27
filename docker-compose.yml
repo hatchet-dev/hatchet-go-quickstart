@@ -48,7 +48,7 @@ services:
     command: bash -euxc "
         /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
         && export HATCHET_CLIENT_TOKEN="$$(SERVER_AUTH_COOKIE_SECRETS="something something" /hatchet/hatchet-admin token create --config /hatchet/config --tenant-id 707d0855-80ab-4e1f-a156-f1c4546cbf52)"
-        && echo $HATCHET_CLIENT_TOKEN > /hatchet/config/token.txt
+        && echo $$HATCHET_CLIENT_TOKEN > /hatchet/config/token.txt
       "
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
