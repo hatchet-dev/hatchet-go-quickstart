@@ -36,19 +36,23 @@ func Run(check chan string) error {
 		Description: "Test workflow.",
 		Steps: []*worker.WorkflowStep{
 			{
-				Function: func(ctx worker.HatchetContext, event *types.TestEvent) error {
+				Function: func(ctx worker.HatchetContext, event *types.TestEvent) (*types.StepResponse, error) {
 					fmt.Println("got event: ", event.Name)
 					check <- "step1"
-					return nil
+					return &types.StepResponse{
+						Message: "step1 response",
+					}, nil
 				},
 				Name: "first-event",
 			},
 			{
 				Parents: []string{"first-event"},
-				Function: func(ctx worker.HatchetContext, event *types.TestEvent) error {
+				Function: func(ctx worker.HatchetContext, event *types.TestEvent) (*types.StepResponse, error) {
 					fmt.Println("got event: ", event.Name)
 					check <- "step2"
-					return nil
+					return &types.StepResponse{
+						Message: "step2 response",
+					}, nil
 				},
 				Name: "second-event",
 			},
