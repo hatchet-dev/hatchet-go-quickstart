@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/hatchet-dev/hatchet/pkg/client"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 func Run() error {
