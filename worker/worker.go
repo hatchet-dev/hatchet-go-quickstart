@@ -9,10 +9,10 @@ import (
 	"github.com/hatchet-dev/hatchet/pkg/worker"
 )
 
-func Run(check chan string) error {
+func Run(check chan string) (func() error, error) {
 	token := os.Getenv("HATCHET_CLIENT_TOKEN")
 	if token == "" {
-		return fmt.Errorf("HATCHET_CLIENT_TOKEN is not set")
+		return nil, fmt.Errorf("HATCHET_CLIENT_TOKEN is not set")
 	}
 
 	_ = os.Setenv("HATCHET_CLIENT_TLS_STRATEGY", "none")
@@ -21,14 +21,14 @@ func Run(check chan string) error {
 		client.WithToken(token),
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	w, err := worker.NewWorker(
 		worker.WithClient(hatchetClient),
 	)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	err = w.On(worker.Event("test-called"), &worker.WorkflowJob{
@@ -59,16 +59,13 @@ func Run(check chan string) error {
 		},
 	})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	cleanup, err := w.Start()
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	// TODO cleanup
-	_ = cleanup
-
-	return nil
+	return cleanup, nil
 }

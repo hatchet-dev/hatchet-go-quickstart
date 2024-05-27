@@ -13,7 +13,11 @@ func main() {
 	}
 
 	ch := make(chan string, 5)
-	if err := worker.Run(ch); err != nil {
+	cleanup, err := worker.Run(ch)
+	if err != nil {
+		panic(err)
+	}
+	if err := cleanup(); err != nil {
 		panic(err)
 	}
 }

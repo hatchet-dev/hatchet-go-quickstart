@@ -17,20 +17,22 @@ func TestExample(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	time.Sleep(5 * time.Second)
-
 	ch := make(chan string, 5)
-	if err := worker.Run(ch); err != nil {
+	cleanup, err := worker.Run(ch)
+	defer func() {
+		if err := cleanup(); err != nil {
+			panic(err)
+		}
+	}()
+	if err != nil {
 		t.Fatal(err)
 	}
-
-	time.Sleep(5 * time.Second)
 
 	if _, err := http.Get("http://localhost:1323/test"); err != nil {
 		t.Fatal(err)
 	}
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(1 * time.Second)
 
 	if <-ch != "step1" {
 		t.Fatal("step1 not received")
