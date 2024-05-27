@@ -17,6 +17,8 @@ func Run() error {
 		return fmt.Errorf("HATCHET_CLIENT_TOKEN environment variable is not set")
 	}
 
+	_ = os.Setenv("HATCHET_CLIENT_TLS_STRATEGY", "none")
+
 	hatchetClient, err := client.New(
 		client.WithToken(token),
 	)

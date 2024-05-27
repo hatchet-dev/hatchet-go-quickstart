@@ -15,6 +15,8 @@ func Run(check chan string) error {
 		return fmt.Errorf("HATCHET_CLIENT_TOKEN is not set")
 	}
 
+	_ = os.Setenv("HATCHET_CLIENT_TLS_STRATEGY", "none")
+
 	hatchetClient, err := client.New(
 		client.WithToken(token),
 	)
