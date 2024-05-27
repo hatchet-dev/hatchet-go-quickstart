@@ -4,7 +4,7 @@ services:
     image: postgres:latest
     command: postgres -c 'max_connections=200'
     restart: always
-    hostname: "postgres"
+    hostname: "postgres-go-quickstart"
     environment:
       - POSTGRES_USER=hatchet
       - POSTGRES_PASSWORD=hatchet
@@ -12,7 +12,7 @@ services:
     ports:
       - "5435:5432"
     volumes:
-      - hatchet_postgres_data:/var/lib/postgresql/data
+      - hatchet_quickstart_postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "hatchet"]
       interval: 10s
@@ -21,7 +21,7 @@ services:
       start_period: 10s
   rabbitmq:
     image: "rabbitmq:3-management"
-    hostname: "rabbitmq"
+    hostname: "rabbitmq-go-quickstart"
     ports:
       - "5673:5672" # RabbitMQ
       - "15673:15672" # Management UI
@@ -29,33 +29,35 @@ services:
       RABBITMQ_DEFAULT_USER: "user"
       RABBITMQ_DEFAULT_PASS: "password"
     volumes:
-      - "hatchet_rabbitmq_data:/var/lib/rabbitmq"
-      - "hatchet_rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf" # Configuration file mount
+      - "hatchet_quickstart_rabbitmq_data:/var/lib/rabbitmq"
+      - "hatchet_quickstart_rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf" # Configuration file mount
     healthcheck:
       test: ["CMD", "rabbitmqctl", "status"]
       interval: 10s
       timeout: 10s
       retries: 5
   migration:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.8.0
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.28.2
     environment:
-      DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
+      DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
     depends_on:
       postgres:
         condition: service_healthy
   setup-config:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.8.0
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.28.2
     command: /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
     environment:
-      DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
+      DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
       DATABASE_POSTGRES_PORT: "5432"
       DATABASE_POSTGRES_HOST: "postgres"
-      SERVER_TASKQUEUE_RABBITMQ_URL: amqp://user:password@rabbitmq:5672/
-      SERVER_AUTH_COOKIE_DOMAIN: app.dev.hatchet-tools.com
+      SERVER_TASKQUEUE_RABBITMQ_URL: amqp://user:password@rabbitmq-go-quickstart:5672/
+      SERVER_AUTH_COOKIE_DOMAIN: localhost:4050
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"
+      SERVER_GRPC_BROADCAST_ADDRESS: "0.0.0.0:7077"
+      SERVER_GRPC_PORT: "7077"
     volumes:
       - ./certs:/hatchet/certs
-      - hatchet_config:/hatchet/config
+      - hatchet_quickstart_config:/hatchet/config
     depends_on:
       migration:
         condition: service_completed_successfully
@@ -64,7 +66,7 @@ services:
       postgres:
         condition: service_healthy
   hatchet-engine:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-engine:v0.8.0
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-engine:v0.28.2
     command: /hatchet/hatchet-engine --config /hatchet/config
     restart: on-failure
     depends_on:
@@ -73,15 +75,17 @@ services:
       migration:
         condition: service_completed_successfully
     ports:
-      - "7077:7070"
+      - "7077:7077"
     environment:
-      DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
+      DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"
+      SERVER_GRPC_BROADCAST_ADDRESS: "0.0.0.0:7077"
+      SERVER_GRPC_PORT: "7077"
     volumes:
       - ./certs:/hatchet/certs
-      - hatchet_config:/hatchet/config
+      - hatchet_quickstart_config:/hatchet/config
   hatchet-api:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-api:v0.8.0
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-api:v0.28.2
     command: /hatchet/hatchet-api --config /hatchet/config
     restart: on-failure
     ports:
@@ -92,17 +96,17 @@ services:
       migration:
         condition: service_completed_successfully
     environment:
-      DATABASE_URL: "postgres://hatchet:hatchet@postgres:5432/hatchet"
+      DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
     volumes:
       - ./certs:/hatchet/certs
-      - hatchet_config:/hatchet/config
+      - hatchet_quickstart_config:/hatchet/config
   hatchet-frontend:
-    image: ghcr.io/hatchet-dev/hatchet/hatchet-frontend:v0.8.0
+    image: ghcr.io/hatchet-dev/hatchet/hatchet-frontend:v0.28.2
     ports:
       - "9099:80"
 
 volumes:
-  hatchet_postgres_data:
-  hatchet_rabbitmq_data:
-  hatchet_rabbitmq.conf:
-  hatchet_config:
+  hatchet_quickstart_postgres_data:
+  hatchet_quickstart_rabbitmq_data:
+  hatchet_quickstart_rabbitmq.conf:
+  hatchet_quickstart_config:
