@@ -1,11 +1,11 @@
-app.dev.hatchet-tools.com {
+http://:80 {
 	tls internal
 
 	handle /api/* {
-		reverse_proxy localhost:8088
+		reverse_proxy hatchet-api:8080
 	}
 
 	handle /* {
-		reverse_proxy localhost:9099
+		reverse_proxy hatchet-frontend:80
 	}
 }

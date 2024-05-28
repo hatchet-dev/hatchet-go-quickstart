@@ -10,7 +10,6 @@ This quickstart example requires the following tools to work:
 
 - `go 1.18+`
 - [`docker`](https://docs.docker.com/engine/install/)
-- [`caddy`](https://caddyserver.com/docs/install)
 
 ### Get up and running
 
@@ -18,7 +17,7 @@ This quickstart example requires the following tools to work:
 
 2. Run `docker compose up` to start the Hatchet instance. This will take a few minutes, as the docker compose services set up the database and generate the required certificates to connect to the Hatchet instance. You can also run `docker compose up -d` to start this in the background. Once you start to see output from the `engine` and `api` services, you can move on to the next step.
 
-3. Run `caddy start` to get an instance running. You should be able to navigate to app.dev.hatchet-tools.com and use the following credentials to log in:
+3. You should be able to navigate to [localhost:8020](http://localhost:8020) and use the following credentials to log in:
 
     ```
     Email: admin@example.com

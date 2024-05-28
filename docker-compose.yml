@@ -51,7 +51,7 @@ services:
       DATABASE_POSTGRES_PORT: "5432"
       DATABASE_POSTGRES_HOST: "postgres-go-quickstart"
       SERVER_TASKQUEUE_RABBITMQ_URL: amqp://user:password@rabbitmq-go-quickstart:5672/
-      SERVER_AUTH_COOKIE_DOMAIN: app.dev.hatchet-tools.com
+      SERVER_AUTH_COOKIE_DOMAIN: localhost:8020
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"
       SERVER_GRPC_BROADCAST_ADDRESS: "127.0.0.1:7077"
       SERVER_GRPC_PORT: "7077"
@@ -106,6 +106,12 @@ services:
     image: ghcr.io/hatchet-dev/hatchet/hatchet-frontend:v0.28.2
     ports:
       - "9099:80"
+  caddy:
+    image: caddy:2.7.6-alpine
+    ports:
+      - 8020:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
 
 volumes:
   hatchet_quickstart_postgres_data:
