@@ -45,15 +45,11 @@ services:
         condition: service_healthy
   setup-config:
     image: ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.28.2
-    command: bash -euxc "
-        /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
-        && export HATCHET_CLIENT_TOKEN="$$(SERVER_AUTH_COOKIE_SECRETS="something something" /hatchet/hatchet-admin token create --config /hatchet/config --tenant-id 707d0855-80ab-4e1f-a156-f1c4546cbf52)"
-        && echo $$HATCHET_CLIENT_TOKEN > /hatchet/config/token.txt
-      "
+    command: /hatchet/hatchet-admin quickstart --cert-dir /hatchet/certs --generated-config-dir /hatchet/config --overwrite=false
     environment:
       DATABASE_URL: "postgres://hatchet:hatchet@postgres-go-quickstart:5432/hatchet"
       DATABASE_POSTGRES_PORT: "5432"
-      DATABASE_POSTGRES_HOST: "postgres"
+      DATABASE_POSTGRES_HOST: "postgres-go-quickstart"
       SERVER_TASKQUEUE_RABBITMQ_URL: amqp://user:password@rabbitmq-go-quickstart:5672/
       SERVER_AUTH_COOKIE_DOMAIN: app.dev.hatchet-tools.com
       SERVER_GRPC_BIND_ADDRESS: "0.0.0.0"

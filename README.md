@@ -1,6 +1,6 @@
 # Hatchet: Go SDK Quickstart
 
-This repository contains a simple application which showcases how to use the [Hatchet](https://github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/worker.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
+This repository contains a simple application which showcases how to use the [Hatchet](https://github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/main.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
 
 ## Getting Started
 
@@ -25,12 +25,25 @@ This quickstart example requires the following tools to work:
     Password: Admin123!!
     ```
 
-4. Create a token and put it in .env:
+4. Create a token. You can do this from the dashboard or from the CLI:
 
-    - Navigate to the [token page](https://app.dev.hatchet-tools.com/tenant-settings/api-tokens) and create a token.
-    - Click the copy to clipboard button and paste into a new file called `.env` in the root of this repository.
+**From the CLI:**
 
-5. Run the server and worker in two separate shell sessions via: `go run ./cmd/server` and `go run ./cmd/worker`.
+```
+export HATCHET_CLIENT_TOKEN="$(docker compose run --no-deps setup-config /hatchet/hatchet-admin token create --config /hatchet/config --tenant-id 707d0855-80ab-4e1f-a156-f1c4546cbf52 | xargs)"
+echo "HATCHET_CLIENT_TOKEN=$HATCHET_CLIENT_TOKEN" > .env
+```
+
+**From the dashboard:**
+    
+- Navigate to the [token page](https://app.dev.hatchet-tools.com/tenant-settings/api-tokens) and create a token.
+- Click the copy to clipboard button and paste into a new file called `.env` in the root of this repository.
+
+5. Start the server and worker:
+
+```
+go run ./cmd/server & go run ./cmd/worker
+```
 
 6. Run `curl http://localhost:1323/test` to test the endpoint.
 

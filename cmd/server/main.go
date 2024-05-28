@@ -3,6 +3,7 @@ package main
 import (
 	"hatchet-go-quickstart/server"
 
+	"github.com/hatchet-dev/hatchet/pkg/cmdutils"
 	"github.com/joho/godotenv"
 )
 
@@ -16,4 +17,8 @@ func main() {
 	if err := server.Run(); err != nil {
 		panic(err)
 	}
+
+	interruptCh := cmdutils.InterruptChan()
+
+	<-interruptCh
 }
