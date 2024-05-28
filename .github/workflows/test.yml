@@ -1,0 +1,32 @@
+name: test
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Compose
+        run: docker compose up -d
+
+      - name: Wait for Hatchet
+        run: sleep 10
+
+      - name: Test
+        run: |
+          set -eux
+          export HATCHET_CLIENT_TOKEN="$(docker compose run --no-deps setup-config /hatchet/hatchet-admin token create --config /hatchet/config --tenant-id 707d0855-80ab-4e1f-a156-f1c4546cbf52 | xargs)"
+          go test ./... -v -failfast
+
+      - name: Teardown
+        run: docker compose down
+
+      - name: Logs
+        if: always()
+        run: docker compose logs

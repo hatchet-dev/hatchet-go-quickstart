@@ -1,6 +1,6 @@
 # Hatchet: Go SDK Quickstart
 
-This repository contains a simple application which showcases how to use the [Hatchet](https://github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/worker.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
+This repository contains a simple application which showcases how to use the [Hatchet](https://github.com/hatchet-dev/hatchet) Go SDK to create events and workflows. In [./cmd/server](./cmd/server/main.go), you'll find a simple [`echo`](https://echo.labstack.com/) server which pushes an event to Hatchet every time it receives a request on `/test`. In [./cmd/worker](./cmd/worker/main.go), we create a worker which runs a simple workflow called `event-test` whenever the `test-called` event is seen.
 
 ## Getting Started
 
@@ -10,7 +10,6 @@ This quickstart example requires the following tools to work:
 
 - `go 1.18+`
 - [`docker`](https://docs.docker.com/engine/install/)
-- [`caddy`](https://caddyserver.com/docs/install)
 
 ### Get up and running
 
@@ -18,26 +17,32 @@ This quickstart example requires the following tools to work:
 
 2. Run `docker compose up` to start the Hatchet instance. This will take a few minutes, as the docker compose services set up the database and generate the required certificates to connect to the Hatchet instance. You can also run `docker compose up -d` to start this in the background. Once you start to see output from the `engine` and `api` services, you can move on to the next step.
 
-3. Run `caddy start` to get an instance running. You should be able to navigate to app.dev.hatchet-tools.com and use the following credentials to log in:
+3. You should be able to navigate to [localhost:8020](http://localhost:8020) and use the following credentials to log in:
 
     ```
     Email: admin@example.com
     Password: Admin123!!
     ```
 
-4. Create the required environment variables via:
+4. Create a token. You can do this from the dashboard or from the CLI:
 
-    ```sh
-    cat > .env <<EOF
-    HATCHET_CLIENT_TENANT_ID=707d0855-80ab-4e1f-a156-f1c4546cbf52
-    HATCHET_CLIENT_TLS_ROOT_CA_FILE=./certs/ca.cert
-    HATCHET_CLIENT_TLS_CERT_FILE=./certs/client-worker.pem
-    HATCHET_CLIENT_TLS_KEY_FILE=./certs/client-worker.key
-    HATCHET_CLIENT_TLS_SERVER_NAME=cluster
-    EOF
-    ```
+**From the CLI:**
 
-5. Run the server and worker in two separate shell sessions via: `go run ./cmd/server` and `go run ./cmd/worker`.
+```
+export HATCHET_CLIENT_TOKEN="$(docker compose run --no-deps setup-config /hatchet/hatchet-admin token create --config /hatchet/config --tenant-id 707d0855-80ab-4e1f-a156-f1c4546cbf52 | xargs)"
+echo "HATCHET_CLIENT_TOKEN=$HATCHET_CLIENT_TOKEN" > .env
+```
+
+**From the dashboard:**
+    
+- Navigate to the [token page](https://app.dev.hatchet-tools.com/tenant-settings/api-tokens) and create a token.
+- Click the copy to clipboard button and paste into a new file called `.env` in the root of this repository.
+
+5. Start the server and worker:
+
+```
+go run ./cmd/server & go run ./cmd/worker
+```
 
 6. Run `curl http://localhost:1323/test` to test the endpoint.
 
