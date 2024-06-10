@@ -13,7 +13,7 @@ updates:
       docker:
         applies-to: version-updates
         patterns:
-          - "*hatchet-engine*"
+          - "*hatchet-*"
 
   - package-ecosystem: "gomod"
     directory: "/"
