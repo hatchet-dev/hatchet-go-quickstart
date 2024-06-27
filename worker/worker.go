@@ -31,7 +31,8 @@ func Run(check chan string) (func() error, error) {
 		return nil, err
 	}
 
-	err = w.On(worker.Event("test-called"), &worker.WorkflowJob{
+	err = w.RegisterWorkflow(&worker.WorkflowJob{
+		On:          worker.Event("test-called"),
 		Name:        "event-test",
 		Description: "Test workflow.",
 		Steps: []*worker.WorkflowStep{
