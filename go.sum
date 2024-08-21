@@ -45,8 +45,8 @@ github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+l
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=
 github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
-github.com/hatchet-dev/hatchet v0.42.5 h1:HfYWIyWN0yX89TcvoE4gVi5LhQcl3kOV1ynAJkKG9ro=
-github.com/hatchet-dev/hatchet v0.42.5/go.mod h1:/l+zfxYl1KdtK5TIlOT9euFDJNMSr6c9a8I13nrcgc8=
+github.com/hatchet-dev/hatchet v0.42.8 h1:K++HbHWslGWY5yi4R/fi6grJNAEIcK/Jnckd8MBdK0E=
+github.com/hatchet-dev/hatchet v0.42.8/go.mod h1:/l+zfxYl1KdtK5TIlOT9euFDJNMSr6c9a8I13nrcgc8=
 github.com/invopop/yaml v0.3.1 h1:f0+ZpmhfBSS4MhG+4HYseMdJhoeeopbSKbq5Rpeelso=
 github.com/invopop/yaml v0.3.1/go.mod h1:PMOp3nn4/12yEZUFfmOuNHJsZToEEOwoWsT+D81KkeA=
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
