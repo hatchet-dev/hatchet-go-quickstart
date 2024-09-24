@@ -1,1 +1,1 @@
-FROM ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.45.3
+FROM ghcr.io/hatchet-dev/hatchet/hatchet-admin:v0.46.0
