@@ -1,1 +1,1 @@
-FROM ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.52.0
+FROM ghcr.io/hatchet-dev/hatchet/hatchet-migrate:v0.52.1
