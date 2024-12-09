@@ -17,12 +17,12 @@ This quickstart example requires the following tools to work:
 
 2. Run `docker compose up` to start the Hatchet instance. This will take a few minutes, as the docker compose services set up the database and generate the required certificates to connect to the Hatchet instance. You can also run `docker compose up -d` to start this in the background. Once you start to see output from the `engine` and `api` services, you can move on to the next step.
 
-3. You should be able to navigate to [localhost:8020](http://localhost:8020) and use the following credentials to log in:
+3. You should be able to navigate to [localhost:8080](http://localhost:8080) and use the following credentials to log in:
 
-    ```
-    Email: admin@example.com
-    Password: Admin123!!
-    ```
+   ```
+   Email: admin@example.com
+   Password: Admin123!!
+   ```
 
 4. Create a token. You can do this from the dashboard or from the CLI:
 
@@ -34,14 +34,14 @@ echo "HATCHET_CLIENT_TOKEN=$HATCHET_CLIENT_TOKEN" > .env
 ```
 
 **From the dashboard:**
-    
+
 - Navigate to the [token page](https://app.dev.hatchet-tools.com/tenant-settings/api-tokens) and create a token.
 - Click the copy to clipboard button and paste into a new file called `.env` in the root of this repository.
 
 5. Start the server and worker:
 
 ```
-go run ./cmd/server & go run ./cmd/worker
+trap "pkill -P $$" EXIT; go run ./cmd/server & go run ./cmd/worker
 ```
 
 6. Run `curl http://localhost:1323/test` to test the endpoint.
