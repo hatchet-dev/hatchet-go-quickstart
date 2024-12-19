@@ -1,9 +1,10 @@
 module hatchet-go-quickstart
 
 go 1.22.3
+toolchain go1.23.4
 
 require (
-	github.com/hatchet-dev/hatchet v0.52.12
+	github.com/hatchet-dev/hatchet v0.53.1
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.13.3
 )
@@ -24,7 +25,7 @@ require (
 	github.com/go-playground/validator/v10 v10.23.0 // indirect
 	github.com/google/cel-go v0.22.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.1.0 // indirect
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.2.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
