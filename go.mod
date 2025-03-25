@@ -4,10 +4,7 @@ go 1.23.0
 
 toolchain go1.23.4
 
-require (
-	github.com/hatchet-dev/hatchet v0.55.24-0.20250325041009-4e592706b78d
-	github.com/joho/godotenv v1.5.1
-)
+require github.com/hatchet-dev/hatchet v0.55.24
 
 require (
 	cel.dev/expr v0.19.1 // indirect
