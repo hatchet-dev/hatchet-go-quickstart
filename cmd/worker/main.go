@@ -1,29 +1,34 @@
 package main
 
 import (
-	"hatchet-go-quickstart/worker"
+	workflows "hatchet-go-quickstart/workflows"
 
-	"github.com/hatchet-dev/hatchet/pkg/cmdutils"
-	"github.com/joho/godotenv"
+	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
+	"github.com/hatchet-dev/hatchet/pkg/v1/worker"
 )
 
 func main() {
-	err := godotenv.Load()
+
+	hatchet, err := v1.NewHatchetClient()
+
 	if err != nil {
 		panic(err)
 	}
 
-	ch := make(chan string, 5)
-	cleanup, err := worker.Run(ch)
+	worker, err := hatchet.Worker(
+		worker.CreateOpts{
+			Name: "first-workflow-worker",
+		},
+		worker.WithWorkflows(workflows.FirstWorkflow(&hatchet)),
+	)
+
 	if err != nil {
 		panic(err)
 	}
 
-	interruptCh := cmdutils.InterruptChan()
+	err = worker.StartBlocking()
 
-	<-interruptCh
-
-	if err := cleanup(); err != nil {
+	if err != nil {
 		panic(err)
 	}
 }
