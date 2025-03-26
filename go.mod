@@ -4,10 +4,7 @@ go 1.23.0
 
 toolchain go1.23.4
 
-require (
-	github.com/hatchet-dev/hatchet v0.55.24-0.20250325041009-4e592706b78d
-	github.com/joho/godotenv v1.5.1
-)
+require github.com/hatchet-dev/hatchet v0.55.27
 
 require (
 	cel.dev/expr v0.19.1 // indirect
@@ -31,7 +28,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.7.1 // indirect
+	github.com/jackc/pgx/v5 v5.7.4 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/labstack/echo/v4 v4.13.3 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
