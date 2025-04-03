@@ -1,40 +1,48 @@
 # Hatchet First Workflow Example
 
-This is an example project demonstrating how to use Hatchet with Go.
-
+This is an example project demonstrating how to use Hatchet with Go. For detailed setup instructions, see the [Hatchet Setup Guide](https://docs.hatchet.run/home/setup).
 
 ## Prerequisites
 
 Before running this project, make sure you have the following:
 
-1. [Go V1.22 or higher](https://go.dev/doc/install)
+1. [Go v1.22 or higher](https://go.dev/doc/install)
 
 ## Setup
 
-1. Set the required environment variable `HATCHET_CLIENT_TOKEN` created in the [Getting Started Guide](https://docs.hatchet.run/home/hatchet-cloud-quickstart).
+1. Clone the repository:
 
+```bash
+git clone https://github.com/hatchet-dev/hatchet-go-quickstart.git
+cd hatchet-go-quickstart
 ```
+
+2. Set the required environment variable `HATCHET_CLIENT_TOKEN` created in the [Getting Started Guide](https://docs.hatchet.run/home/hatchet-cloud-quickstart).
+
+```bash
 export HATCHET_CLIENT_TOKEN=<token>
 ```
 
-2. Run the following command to install the project dependencies:
+> Note: If you're self hosting you may need to set `HATCHET_CLIENT_TLS_STRATEGY=none` to disable TLS
 
-   ```shell
-   go mod tidy
-   ```
+3. Install the project dependencies:
+
+```bash
+go mod tidy
+```
 
 ### Running an example
 
-1. Start a Hatchet worker by running the following command:
+1. Start a Hatchet worker:
 
-```shell
+```bash
 go run cmd/worker/main.go
 ```
 
-2. To run the example workflow, open a new terminal and run the following command:
+2. In a new terminal, run the example task:
 
-```shell
+```bash
 go run cmd/run/main.go
 ```
 
-This will trigger the workflow on the worker running in the first terminal and print the output to the the second terminal.
+This will trigger the task on the worker running in the first terminal and print the output to the second terminal.
