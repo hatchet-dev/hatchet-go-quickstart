@@ -4,7 +4,7 @@ go 1.23.0
 
 toolchain go1.23.4
 
-require github.com/hatchet-dev/hatchet v0.58.7
+require github.com/hatchet-dev/hatchet v0.58.8
 
 require (
 	cel.dev/expr v0.19.1 // indirect
