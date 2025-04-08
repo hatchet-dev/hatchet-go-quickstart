@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
 	workflows "hatchet-go-quickstart/workflows"
@@ -16,9 +17,9 @@ func main() {
 		panic(err)
 	}
 
-	simple := workflows.FirstWorkflow(&hatchet)
+	simple := workflows.FirstWorkflow(hatchet)
 
-	result, err := simple.Run(workflows.SimpleInput{
+	result, err := simple.Run(context.Background(), workflows.SimpleInput{
 		Message: "Hello, World!",
 	})
 

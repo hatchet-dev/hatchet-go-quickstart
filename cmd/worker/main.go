@@ -5,6 +5,7 @@ import (
 
 	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
 	"github.com/hatchet-dev/hatchet/pkg/v1/worker"
+	"github.com/hatchet-dev/hatchet/pkg/v1/workflow"
 )
 
 func main() {
@@ -16,10 +17,12 @@ func main() {
 	}
 
 	worker, err := hatchet.Worker(
-		worker.CreateOpts{
+		worker.WorkerOpts{
 			Name: "first-workflow-worker",
+			Workflows: []workflow.WorkflowBase{
+				workflows.FirstWorkflow(hatchet),
+			},
 		},
-		worker.WithWorkflows(workflows.FirstWorkflow(&hatchet)),
 	)
 
 	if err != nil {
