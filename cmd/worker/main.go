@@ -1,17 +1,17 @@
 package main
 
 import (
+	hatchet_client "hatchet-go-quickstart/hatchet_client"
 	workflows "hatchet-go-quickstart/workflows"
 
 	"github.com/hatchet-dev/hatchet/pkg/cmdutils"
-	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
 	"github.com/hatchet-dev/hatchet/pkg/v1/worker"
 	"github.com/hatchet-dev/hatchet/pkg/v1/workflow"
 )
 
 func main() {
 
-	hatchet, err := v1.NewHatchetClient()
+	hatchet, err := hatchet_client.HatchetClient()
 
 	if err != nil {
 		panic(err)

@@ -4,14 +4,13 @@ import (
 	"context"
 	"fmt"
 
+	hatchet_client "hatchet-go-quickstart/hatchet_client"
 	workflows "hatchet-go-quickstart/workflows"
-
-	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
 )
 
 func main() {
 
-	hatchet, err := v1.NewHatchetClient()
+	hatchet, err := hatchet_client.HatchetClient()
 
 	if err != nil {
 		panic(err)
