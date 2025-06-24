@@ -25,6 +25,8 @@ export HATCHET_CLIENT_TOKEN=<token>
 
 > Note: If you're self hosting you may need to set `HATCHET_CLIENT_TLS_STRATEGY=none` to disable TLS
 
+You can also use a `.env` file to load these environment variables. A sample exists in the form of a `.env.sample`.
+
 3. Install the project dependencies:
 
 ```bash
