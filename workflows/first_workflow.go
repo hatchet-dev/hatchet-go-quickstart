@@ -4,44 +4,23 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/hatchet-dev/hatchet/pkg/client/create"
-	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
-	"github.com/hatchet-dev/hatchet/pkg/v1/factory"
-	"github.com/hatchet-dev/hatchet/pkg/v1/workflow"
-	"github.com/hatchet-dev/hatchet/pkg/worker"
+	hatchet "github.com/hatchet-dev/hatchet/sdks/go"
 )
 
 type SimpleInput struct {
-	Message string
+	Message string `json:"message"`
 }
 
-type LowerOutput struct {
-	TransformedMessage string
+type SimpleOutput struct {
+	TransformedMessage string `json:"transformed_message"`
 }
 
-type SimpleResult struct {
-	ToLower LowerOutput
-}
+func FirstWorkflow(c *hatchet.Client) *hatchet.StandaloneTask {
+	return c.NewStandaloneTask("first-workflow", func(ctx hatchet.Context, input SimpleInput) (SimpleOutput, error) {
+		fmt.Println("ToLower task called")
 
-func FirstWorkflow(hatchet v1.HatchetClient) workflow.WorkflowDeclaration[SimpleInput, SimpleResult] {
-	simple := factory.NewWorkflow[SimpleInput, SimpleResult](
-		create.WorkflowCreateOpts[SimpleInput]{
-			Name: "first-workflow",
-		},
-		hatchet,
-	)
-
-	simple.Task(
-		create.WorkflowTask[SimpleInput, SimpleResult]{
-			Name: "ToLower",
-		},
-		func(ctx worker.HatchetContext, input SimpleInput) (any, error) {
-			fmt.Println("ToLower task called")
-			return &LowerOutput{
-				TransformedMessage: strings.ToLower(input.Message),
-			}, nil
-		},
-	)
-
-	return simple
+		return SimpleOutput{
+			TransformedMessage: strings.ToLower(input.Message),
+		}, nil
+	})
 }
