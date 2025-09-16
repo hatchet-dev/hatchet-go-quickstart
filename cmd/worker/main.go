@@ -1,30 +1,26 @@
 package main
 
 import (
-	hatchet_client "hatchet-go-quickstart/hatchet_client"
-	workflows "hatchet-go-quickstart/workflows"
+	"log"
 
+	"github.com/hatchet-dev/hatchet-go-quickstart/client"
+	"github.com/hatchet-dev/hatchet-go-quickstart/workflows"
 	"github.com/hatchet-dev/hatchet/pkg/cmdutils"
-	"github.com/hatchet-dev/hatchet/pkg/v1/worker"
-	"github.com/hatchet-dev/hatchet/pkg/v1/workflow"
+	hatchet "github.com/hatchet-dev/hatchet/sdks/go"
 )
 
 func main() {
-	hatchet, err := hatchet_client.HatchetClient()
+	c, err := client.HatchetClient()
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to create Hatchet client: %v", err)
 	}
 
-	worker, err := hatchet.Worker(
-		worker.WorkerOpts{
-			Name: "first-workflow-worker",
-			Workflows: []workflow.WorkflowBase{
-				workflows.FirstWorkflow(hatchet),
-			},
-		},
+	worker, err := c.NewWorker(
+		"first-workflow-worker",
+		hatchet.WithWorkflows(workflows.FirstWorkflow(c)),
 	)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to create Hatchet worker: %v", err)
 	}
 
 	// we construct an interrupt context to handle Ctrl+C
@@ -35,6 +31,6 @@ func main() {
 
 	err = worker.StartBlocking(interruptCtx)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to start Hatchet worker: %v", err)
 	}
 }

@@ -1,14 +1,14 @@
-package hatchet_client
+package client
 
 import (
 	"errors"
 	"os"
 
-	v1 "github.com/hatchet-dev/hatchet/pkg/v1"
+	hatchet "github.com/hatchet-dev/hatchet/sdks/go"
 	"github.com/joho/godotenv"
 )
 
-func HatchetClient() (v1.HatchetClient, error) {
+func HatchetClient() (*hatchet.Client, error) {
 	if _, err := os.Stat(".env"); os.IsExist(err) {
 		err := godotenv.Load()
 		if err != nil {
@@ -22,5 +22,5 @@ func HatchetClient() (v1.HatchetClient, error) {
 		return nil, errors.New("HATCHET_CLIENT_TOKEN is not set")
 	}
 
-	return v1.NewHatchetClient()
+	return hatchet.NewClient()
 }

@@ -3,25 +3,33 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 
-	hatchet_client "hatchet-go-quickstart/hatchet_client"
-	workflows "hatchet-go-quickstart/workflows"
+	"github.com/hatchet-dev/hatchet-go-quickstart/client"
+	"github.com/hatchet-dev/hatchet-go-quickstart/workflows"
 )
 
 func main() {
-	hatchet, err := hatchet_client.HatchetClient()
+	c, err := client.HatchetClient()
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to create Hatchet client: %v", err)
 	}
 
-	simple := workflows.FirstWorkflow(hatchet)
+	simple := workflows.FirstWorkflow(c)
 
 	result, err := simple.Run(context.Background(), workflows.SimpleInput{
-		Message: "Hello, World!",
+		Message: "HELLO, WORLD!",
 	})
 	if err != nil {
-		panic(err)
+		log.Fatalf("Failed to run Hatchet task: %v", err)
 	}
 
-	fmt.Println(result.ToLower.TransformedMessage)
+	var simpleResult workflows.SimpleOutput
+
+	err = result.Into(&simpleResult)
+	if err != nil {
+		log.Fatalf("Failed to convert result to SimpleOutput: %v", err)
+	}
+
+	fmt.Println(simpleResult.TransformedMessage)
 }
