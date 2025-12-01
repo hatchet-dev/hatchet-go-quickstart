@@ -3,7 +3,7 @@ module github.com/hatchet-dev/hatchet-go-quickstart
 go 1.24.0
 
 require (
-	github.com/hatchet-dev/hatchet v0.73.73
+	github.com/hatchet-dev/hatchet v0.73.74
 	github.com/joho/godotenv v1.5.1
 )
 
@@ -19,7 +19,7 @@ require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
 	github.com/getkin/kin-openapi v0.133.0 // indirect
-	github.com/getsentry/sentry-go v0.39.0 // indirect
+	github.com/getsentry/sentry-go v0.40.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
