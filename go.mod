@@ -3,7 +3,7 @@ module github.com/hatchet-dev/hatchet-go-quickstart
 go 1.25.0
 
 require (
-	github.com/hatchet-dev/hatchet v0.74.12
+	github.com/hatchet-dev/hatchet v0.74.14
 	github.com/joho/godotenv v1.5.1
 )
 
@@ -71,7 +71,7 @@ require (
 	golang.org/x/net v0.48.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.39.0 // indirect
-	golang.org/x/text v0.32.0 // indirect
+	golang.org/x/text v0.33.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251202230838-ff82c1b0f217 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
 	google.golang.org/grpc v1.78.0 // indirect
