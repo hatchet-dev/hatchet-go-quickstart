@@ -74,8 +74,8 @@ github.com/hashicorp/errwrap v1.1.0 h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY
 github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=
-github.com/hatchet-dev/hatchet v0.75.0 h1:cksieT+I2lckm0oUl1tG73A7+0c4gVZ1AokJVAYrHPo=
-github.com/hatchet-dev/hatchet v0.75.0/go.mod h1:CVxX3h+kjE2Oc03Vc2G3/S++TOkXp8ecgrkm7tmMI3M=
+github.com/hatchet-dev/hatchet v0.75.1 h1:+ag7BfrVV1XkhPM8eVETo0t+x/bu1b0aoWlviw3UIbA=
+github.com/hatchet-dev/hatchet v0.75.1/go.mod h1:yx3UtpsVnsOoLkwV9A5Yan4Y1K3nAJ5cyGUepeWtR5A=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 h1:iCEnooe7UlwOQYpKFhBabPMi4aNAfoODPEFNiAnClxo=
