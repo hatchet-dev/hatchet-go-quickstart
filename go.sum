@@ -79,8 +79,8 @@ github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+l
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=
 github.com/hashicorp/golang-lru/v2 v2.0.7 h1:a+bsQ5rvGLjzHuww6tVxozPZFVghXaHOwFs4luLUK2k=
 github.com/hashicorp/golang-lru/v2 v2.0.7/go.mod h1:QeFd9opnmA6QUJc5vARoKUSoFhyfM2/ZepoAG6RGpeM=
-github.com/hatchet-dev/hatchet v0.79.33 h1:K1I8ro4PDZXCnos03JNcuyRlW3nMqeMDFMW9Bjv3Cp4=
-github.com/hatchet-dev/hatchet v0.79.33/go.mod h1:z1thbgiBBs5VfJQ4sDs/St6R+Wh4jsMu8redEIcLGig=
+github.com/hatchet-dev/hatchet v0.79.35 h1:P4pToTB9rOEK/z5lix4VR81fBb0dMtD5CNdvsjQzgFA=
+github.com/hatchet-dev/hatchet v0.79.35/go.mod h1:ASmdhFbS3nW5nUsfZQjVQqw4askqodW1sc46FMu+NUY=
 github.com/jackc/pgpassfile v1.0.0 h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM=
 github.com/jackc/pgpassfile v1.0.0/go.mod h1:CEx0iS5ambNFdcRtxPj5JhEz+xB6uRky5eyVu/W2HEg=
 github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 h1:iCEnooe7UlwOQYpKFhBabPMi4aNAfoODPEFNiAnClxo=
