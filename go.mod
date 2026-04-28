@@ -3,7 +3,7 @@ module github.com/hatchet-dev/hatchet-go-quickstart
 go 1.25.0
 
 require (
-	github.com/hatchet-dev/hatchet v0.83.50
+	github.com/hatchet-dev/hatchet v0.83.55
 	github.com/joho/godotenv v1.5.1
 )
 
@@ -58,7 +58,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
-	github.com/rs/zerolog v1.35.0 // indirect
+	github.com/rs/zerolog v1.35.1 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sourcegraph/conc v0.3.1-0.20240121214520-5f936abd7ae8 // indirect
 	github.com/spf13/afero v1.15.0 // indirect
