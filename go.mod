@@ -3,12 +3,13 @@ module github.com/hatchet-dev/hatchet-go-quickstart
 go 1.26.7
 
 require (
-	github.com/hatchet-dev/hatchet v0.111.0
+	github.com/hatchet-dev/hatchet v0.111.3
 	github.com/joho/godotenv v1.5.1
 )
 
 require (
 	cel.dev/expr v0.25.2 // indirect
+	github.com/KimMachineGun/automemlimit v1.0.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
@@ -50,6 +51,7 @@ require (
 	github.com/oapi-codegen/runtime v1.7.0 // indirect
 	github.com/oasdiff/yaml v0.1.1 // indirect
 	github.com/oasdiff/yaml3 v0.0.14 // indirect
+	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 // indirect
 	github.com/pelletier/go-toml/v2 v2.4.3 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
