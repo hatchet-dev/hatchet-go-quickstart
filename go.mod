@@ -1,9 +1,9 @@
 module github.com/hatchet-dev/hatchet-go-quickstart
 
-go 1.26.7
+go 1.26.10
 
 require (
-	github.com/hatchet-dev/hatchet v0.112.12
+	github.com/hatchet-dev/hatchet v0.113.4
 	github.com/joho/godotenv v1.5.1
 )
 
